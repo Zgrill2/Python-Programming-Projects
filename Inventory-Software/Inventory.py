@@ -1,12 +1,13 @@
 from collections import defaultdict  # this solves potential problems down the road with erroneous key calls
 from Product import Product
 
+
 class Inventory:
     def __init__(self, name):
         self.name = name
         self.p = Product(0,"error")
         self.products_list = {}
-        self.products_list = defaultdict(lambda:[Product(0,"error"),0],self.products_list)
+        self.products_list = defaultdict(lambda: [Product(0, "error"), 0], self.products_list)
 
     def add_product(self, product_to_add):
 
@@ -19,3 +20,6 @@ class Inventory:
 
     def print_name(self):
         return "##########\n%s\n##########" % self.name
+
+def create_master_list(inventory_list):
+    for
