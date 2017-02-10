@@ -21,5 +21,21 @@ class Inventory:
     def print_name(self):
         return "##########\n%s\n##########" % self.name
 
+
 def create_master_list(inventory_list):
-    for
+    master_list = {}
+    master_list = defaultdict(lambda: [Product(0, "error"),0], master_list)
+    for i in inventory_list:
+        if i is not Inventory:
+            continue
+        for key in i.products_list:
+            try:
+                if master_list[i.products_list[key].id][1] == 0:  # if product not in master list
+                    master_list[i.products_list[key].id][1] = 1
+                    master_list[i.products_list[key].id][0] = i.products_list[key][0]
+                else:
+                    master_list[i.products_list[key].id][1] += 1
+            except:
+                master_list[i.products_list[key].id][1] = 1
+                master_list[i.products_list[key].id][0] += 1
+    return master_list
