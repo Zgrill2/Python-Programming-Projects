@@ -10,16 +10,22 @@ class PointOfSale:
         self.inventories = inventory_list
         self.current_sale = []
         self.master_sale_list = []
+        self.master_product_list = Inventory.create_master_list(self.inventories)
 
     def pretend_to_process_payment(self):
         pass
 
     def get_product(self, id):
-        mlist = Inventory.create_master_list(self.inventories)
-        return (mlist[id][0],mlist[id][1])  # return tuple of product and quantity
+        return self.mlist[id][0], self.mlist[id][1]  # return tuple of product and quantity
 
     def add_to_sale(self, id):
         self.current_sale.append(self.get_product(id))
+
+    def remove_from_sale(self, id):
+        for sale_index in range(len(self.current_sale)):
+            if self.current_sale[sale_index][1].id == id:
+                del self.current_sale[sale_index]
+                break
 
     def complete_sale(self, id, quantity):
         prod_for_sale = self.get_product(id)
